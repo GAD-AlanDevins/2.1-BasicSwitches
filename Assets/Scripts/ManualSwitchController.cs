@@ -16,6 +16,10 @@ using UnityEngine;
 
 public class ManualSwitchController : MonoBehaviour
 {
+
+    public GameObject bulb;
+    public Animator bulbAnimator;
+
     // switchOff reflects whether the switch is on ot off
     private bool switchOff = true;
 
@@ -37,7 +41,7 @@ public class ManualSwitchController : MonoBehaviour
         // Let's turn off the switch to start with
         turnOff();
     }
-
+     
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) == true)
@@ -50,22 +54,26 @@ public class ManualSwitchController : MonoBehaviour
     {
         switchOff = false;
         switchAnimator.SetBool("SwitchOff", switchOff);
+        bulbAnimator.SetBool("bulbOn", true);
     }
 
     public void turnOff()
     {
         switchOff = true;
         switchAnimator.SetBool("SwitchOff", switchOff);
+        bulbAnimator.SetBool("bulbOn", false);
     }
 
     public void enableSwitch()
     {
         switchEnabled = true;
+
     }
 
     public void disableSwitch()
     {
         switchEnabled = false;
+
     }
 
     // The following function will toggle the switch but only if the 
@@ -76,10 +84,21 @@ public class ManualSwitchController : MonoBehaviour
         {
             switchOff = !switchOff;
             switchAnimator.SetBool("SwitchOff", switchOff);
+            if (switchOff == false)
+            {
+                bulbAnimator.SetBool("bulbOn", true);
+            }
+            else
+            {
+                bulbAnimator.SetBool("bulbOn", false);
+
+            }
+
         }
         else
         {
             Debug.Log("Can't toggle switch as it's not enabled");
+
         }
     }
 

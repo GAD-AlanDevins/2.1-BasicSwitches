@@ -11,6 +11,9 @@ using UnityEngine;
 
 public class AutoSwitchController : MonoBehaviour
 {
+    public GameObject bulb;
+    public Animator bulbAnimator;
+
     // switchOff reflects whether the switch is on ot off
     public bool switchOff = true;
 
@@ -33,12 +36,16 @@ public class AutoSwitchController : MonoBehaviour
     {
         switchOff = false;
         switchAnimator.SetBool("SwitchOff", switchOff);
+        bulbAnimator.SetBool("bulbOn", true);
+
     }
 
     public void turnOff()
     {
         switchOff = true;
         switchAnimator.SetBool("SwitchOff", switchOff);
+        bulbAnimator.SetBool("bulbOn", false);
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
